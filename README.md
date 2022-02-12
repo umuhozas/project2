@@ -74,10 +74,10 @@ After that, we are going to use cross validation to compare and select a better 
 xtrain, xtest, ytrain, ytest = tts(x,y,test_size=0.25, random_state=123)
 ```
 
-Next, I standardize the data using standardScaler to make sure that the data I amusing is consistent.
+Next, I standardize the data using standardScaler to make sure that the data I am using is consistent.
 
 ```Python
-# Let's standardize our data using standardScaler to make sure that our data is consistent.
+
 scale = StandardScaler()
 xtrain_scaled = scale.fit_transform(xtrain.reshape(-1,1))
 xtest_scaled = scale.transform(xtest.reshape(-1,1))
