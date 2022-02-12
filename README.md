@@ -83,6 +83,23 @@ xtrain_scaled = scale.fit_transform(xtrain.reshape(-1,1))
 xtest_scaled = scale.transform(xtest.reshape(-1,1))
 
 ```
+After standardizing our data, I chacked our predicted value of the results of out test set and start guessing values for tau hyper-parameter.
+
+```Python
+yhat_test = lowess_reg(xtrain_scaled.ravel(),ytrain,xtest_scaled,tricubic,0.1)
+
+```
+After this, I chacked the mean square error for our test set
+
+```Python
+mse(yhat_test,ytest)
+
+```
+The mse = 15.961885966790932 
+
+```Python
+plt.plot(np.sort(xtest_scaled.ravel()),yhat_test)
+```
 
 
-In this project, I used the cars.csv dataset and I separated our data into independent and dependent variables. The output is the mileage for the cars in the dataset. Before applying Locally Weighted Regession and the Random Forest methods, we download the kernels to help in constructing non-linear decision boundaries using linear classifiers. 
+
