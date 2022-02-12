@@ -115,7 +115,43 @@ Let's fit the modelon our train data and check the predictons it makes
 rf.fit(xtrain_scaled,ytrain)
 yhat = rf.predict(xtest_scaled)
 ```
-```Python
+Let's try to visualize our results 
 
+```Python
+plt.scatter(xtest,ytest)
+plt.plot(xtest,yhat)
 ```
+![download](https://user-images.githubusercontent.com/98835048/153719187-6cfd8d43-7752-48e1-afe7-e948808be027.png)
+
+Let's check the mean square error for our test set with random forest
+```python
+mse(ytest,rf.predict(xtest_scaled))
+```
+mse = 16.05204604119262
+
+Let's try K-fold Crossvalidation on both methods
+
+```Python
+mse_lwr = []
+mse_rf = []
+rf = RandomForestRegressor(n_estimators=1500,max_depth=3)#n_estimators is the number of trees in the forest
+kf = KFold(n_splits=10,shuffle=True,random_state=1234)
+for idxtrain,idxtest in kf.split(x):#for the indices of train and test, split the data
+  ytrain = y[idxtrain]
+  xtrain = x[idxtrain]
+  xtrain = scale.fit_transform(xtrain.reshape(-1,1)) #reshape/scale the data
+  ytest = y[idxtest]
+  xtest = x[idxtest]
+  xtest = scale.transform(xtest.reshape(-1,1))
+  yhat_lwr = lowess_reg(xtrain.ravel(),ytrain,xtest.ravel(),tricubic,0.4) #tau =0.1 is good when dealing with standardized data
+  rf.fit(xtrain,ytrain)
+  yhat_rf = rf.predict(xtest)
+  mse_lwr.append(mse(ytest,yhat_lwr))
+  mse_rf.append(mse(ytest,yhat_rf))
+print('The MSE for Random Forest is :' + str(np.mean(mse_rf)))
+print('The MSE for Locally Weighted Regression is :' + str(np.mean(mse_lwr)))
+```
+The MSE for Random Forest is :17.653524909268835
+The MSE for Locally Weighted Regression is :17.509317956140727
+
 
