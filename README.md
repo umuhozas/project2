@@ -152,6 +152,9 @@ print('The MSE for Random Forest is :' + str(np.mean(mse_rf)))
 print('The MSE for Locally Weighted Regression is :' + str(np.mean(mse_lwr)))
 ```
 The MSE for Random Forest is :17.653524909268835
+
 The MSE for Locally Weighted Regression is :17.509317956140727
+
+In Conclusion, Both the Locally Weighted Regression and Random forest gives approximately equalmean squared erro on our tests. I played around with the number of trees, tau,and the random state value on both standardized data and un standardized data, and the results suggest that Locally weighted regression performsbetter than the RandomForest
 
 
