@@ -102,3 +102,20 @@ plt.plot(np.sort(xtest_scaled.ravel()),yhat_test)
 ```
 ![download (1)](https://user-images.githubusercontent.com/98835048/153718249-de76a865-63e2-46dc-8736-75ba76dd9b48.png)
 
+# Random Forest. 
+
+After applying Locally weighted regression method on this data, I decidedto try Random Forest as well to findout which one works better. The random forest establishes the outcome based on the predictions of the other decision trees using the average of the mean. Random forest does not need hyperparameters like the locally weighted regression model.
+
+```Python
+rf = RandomForestRegressor(n_estimators=100,max_depth=3)
+
+```
+Let's fit the modelon our train data and check the predictons it makes
+```Python
+rf.fit(xtrain_scaled,ytrain)
+yhat = rf.predict(xtest_scaled)
+```
+```Python
+
+```
+
